@@ -19,10 +19,27 @@ const CalculatorForm = (props) => {
         { value: 'DIVIDE', label: 'Dělení' },
     ];
 
+    let calculate = () => {
+        const { x, y } = props;
+        switch (selectedOptionState.selectedOptionState.value) {
+            case 'ADD':
+                return parseFloat(x) + parseFloat(y);
+            case 'SUBTRACT':
+                return parseFloat(x) - parseFloat(y);
+            case 'MULTIPLY':
+                return parseFloat(x) * parseFloat(y);
+            case 'DIVIDE':
+                return parseFloat(x) / parseFloat(y);
+            default:
+                return null; // Sem by to nikdy nemělo dojít.
+        }
+    };
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        //const result = calculate(); // tuto funkci implementujeme později, kód se ale nezkompiluje, pokud tyto dva řádky do té doby nezakomentujeme
-        //setResultState(result);
+        const result = calculate();
+        console.log(result);
+        setResultState(result);
     };
     const handleChange = (selectedOptionState) => {
         setSelectedOptionState({ selectedOptionState });
@@ -44,7 +61,7 @@ const CalculatorForm = (props) => {
                 />
                 <Select
                     onChange={handleChange}
-                    value={selectedOptionState.value}
+                    value={selectedOptionState.selectedOption}
                     options={options}
                 />
                 <input value="Spočítej" type="submit" />
