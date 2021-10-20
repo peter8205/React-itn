@@ -1,15 +1,16 @@
 import React from 'react';
 
-let NumberInput = () => {
-
+let NumberInput = (props) => {
+    const { name, label } = props;
     return (
-        <label htmlFor="x">
-            První číslo
+        <label htmlFor={name}>
+            {label}
             <input
-                id="x"
+                onChange={props.OnChange}
+                id={name}
                 type="number"
-                name="x"
-                required value="0"
+                name={name}
+                required
             />
         </label>
     );
